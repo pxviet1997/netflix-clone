@@ -4,11 +4,12 @@ import requests from './requests';
 
 function App() {
   return (
-    <div>
-      <h1>Hey Clever Programmer! Let's build Netflix Clone Front-end today!</h1>
+    <div className="app">
+
       <Row
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
+        isLargeRow
       />
       <Row
         title="TRENDING NOW"

@@ -9,18 +9,17 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(fetchUrl);
-        console.log(response);
+        // console.log(response);
         setMovies(response.data.results);
       }
       catch (err) {
-        console.log(err);
+        console.log('Row: ' + err);
       }
     }
     fetchData();
   }, [fetchUrl]);
 
-  console.log(movies);
-
+  // console.log(movies);
 
   return (
     <div className="row">

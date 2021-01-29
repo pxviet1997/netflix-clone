@@ -24,11 +24,11 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
   return (
     <div className="row">
       <h2>{title}</h2>
-      <div className="row_posters">
+      <div className="row-posters">
         {movies.map((movie) => (
           <img
             key={movie.id}
-            className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+            className={`row-poster ${isLargeRow && "row-posterLarge"}`}
             src={`https://image.tmdb.org/t/p/original/${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
             alt={movie.name} />
         ))}

@@ -13,7 +13,6 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(fetchUrl);
-        // console.log(response);
         setMovies(response.data.results);
       }
       catch (err) {
@@ -32,6 +31,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
         .then(url => {
           const urlParams = new URLSearchParams(new URL(url).search);
           setTrailerUrl(urlParams.get('v'));
+          console.log(urlParams.get('v'));
         }).catch(err => { console.log(err) });
     }
   }
@@ -43,8 +43,6 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
       autoplay: 1
     }
   };
-
-  // console.log(movies);
 
   return (
     <div className="row">

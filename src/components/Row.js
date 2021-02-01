@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import YouTube from 'react-youtube';
 import axios from '../api/axios';
 import './Row.css';
 
@@ -19,6 +20,14 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     fetchData();
   }, [fetchUrl]);
 
+  const opts = {
+    height: "390",
+    widht: "100%",
+    playerVars: {
+      autoplay: 1
+    }
+  };
+
   // console.log(movies);
 
   return (
@@ -33,7 +42,9 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
             alt={movie.name} />
         ))}
       </div>
+      <YouTube videoId={trailerUrl} opts={opts} />
     </div>
+
   );
 };
 

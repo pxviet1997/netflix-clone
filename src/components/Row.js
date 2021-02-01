@@ -3,8 +3,11 @@ import YouTube from 'react-youtube';
 import axios from '../api/axios';
 import './Row.css';
 
+import movieTrailer from 'movie-trailer';
+
 const Row = ({ title, fetchUrl, isLargeRow }) => {
   const [movies, setMovies] = useState([]);
+  const [trailerUrl, setTrailerUrl] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +22,19 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     }
     fetchData();
   }, [fetchUrl]);
+
+  const handleClick = (movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    }
+    else {
+      movieTrailer(movie?.name || "")
+        .then(url => {
+          const urlParams = new URLSearchParams(new URL(url).search);
+          setTrailerUrl(urlParams.get('v'));
+        }).catch(err => { console.log(err) });
+    }
+  }
 
   const opts = {
     height: "390",
@@ -37,12 +53,13 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
         {movies.map((movie) => (
           <img
             key={movie.id}
+            onClick={() => handleClick(movie)}
             className={`row-poster ${isLargeRow && "row-posterLarge"}`}
             src={`https://image.tmdb.org/t/p/original/${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
             alt={movie.name} />
         ))}
       </div>
-      <YouTube videoId={trailerUrl} opts={opts} />
+      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
     </div>
 
   );
